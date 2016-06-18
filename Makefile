@@ -69,7 +69,8 @@ deploy: export SYMFONY_ENV=prod
 deploy: deploy-deps deploy-assets deploy-warmup
 
 deploy-deps:
-	composer install -o --no-dev
+	curl -sS https://getcomposer.org/installer | php
+	composer.phar install -o --no-dev
 
 deploy-assets:
 	php bin/console assetic:dump --env=prod
