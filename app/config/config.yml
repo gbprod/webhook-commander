@@ -1,9 +1,8 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: services/ }
 
 framework:
     secret: '%secret%'
     router:
-        resource: '%kernel.root_dir%/config/routings/'
-        type: directory
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~

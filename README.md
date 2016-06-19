@@ -5,11 +5,6 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gbprod/webhook-commander/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gbprod/webhook-commander/?branch=master) 
 [![Dependency Status](https://www.versioneye.com/user/projects/574a9caace8d0e004130d3aa/badge.svg)](https://www.versioneye.com/user/projects/574a9caace8d0e004130d3aa)
 
-[![Latest Stable Version](https://poser.pugx.org/gbprod/webhook-commander/v/stable)](https://packagist.org/packages/gbprod/webhook-commander)
-[![Total Downloads](https://poser.pugx.org/gbprod/webhook-commander/downloads)](https://packagist.org/packages/gbprod/webhook-commander)
-[![Latest Unstable Version](https://poser.pugx.org/gbprod/webhook-commander/v/unstable)](https://packagist.org/packages/gbprod/webhook-commander)
-[![License](https://poser.pugx.org/gbprod/webhook-commander/license)](https://packagist.org/packages/gbprod/webhook-commander)
-
 ## Installation
 
 ### With Composer
@@ -30,3 +25,4 @@ make deploy
 ## Licence
 
 This package is under [MIT Licence](LICENCE). 
+Feel free to contribute !
