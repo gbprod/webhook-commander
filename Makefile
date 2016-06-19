@@ -53,11 +53,11 @@ update-database:
 ########
 
 ## Run tests
-test: 
+test:
 	vendor/bin/phpunit --testsuite unit
 
 ## Run functionnal tests
-test-func: 
+test-func:
 	vendor/bin/phpunit --testsuite functionnal
 
 ## Code coverage
@@ -70,15 +70,11 @@ coverage:
 
 ## Deploy application
 deploy: export SYMFONY_ENV=prod
-deploy: deploy-deps deploy-assets deploy-warmup
+deploy: deploy-deps deploy-warmup
 
 deploy-deps:
 	curl -sS https://getcomposer.org/installer | php
 	composer.phar install -o --no-dev
-
-deploy-assets:
-	php bin/console assetic:dump --env=prod
-	php bin/console assets:install --env=prod
 
 deploy-warmup:
 	php bin/console cache:warmup --env=prod
