@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AppBundle\Controller;
+namespace Tests\Units\AppBundle\Controller;
 
 use AppBundle\Controller\CallbackController;
 use Symfony\Component\HttpFoundation\Response;

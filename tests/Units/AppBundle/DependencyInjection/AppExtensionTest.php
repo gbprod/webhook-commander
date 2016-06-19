@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AppBundle\DependencyInjection;
+namespace Tests\Units\AppBundle\DependencyInjection;
 
 use AppBundle\DependencyInjection\AppExtension;
 use AppBundle\Controller\CallbackController;

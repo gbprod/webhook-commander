@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AppBundle\DependencyInjection;
+namespace Tests\Units\AppBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use AppBundle\DependencyInjection\Configuration;
