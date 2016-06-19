@@ -25,7 +25,7 @@ class AppExtensionTest extends \PHPUnit_Framework_TestCase
         $this->container = new ContainerBuilder();
         $this->container->registerExtension($this->extension);
 
-        $this->container->setParameter('secret', 'my-little-secret');
+        $this->container->setParameter('kernel.secret', 'my-little-secret');
 
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
