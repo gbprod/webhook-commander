@@ -32,8 +32,6 @@ class CallbackControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $this->setExpectedException(AccessDeniedHttpException::class);
-
         $client->request(
             'POST',
             '/webhook/callback',
@@ -42,5 +40,7 @@ class CallbackControllerTest extends WebTestCase
             ['HTTP_X_HUB_SIGNATURE' => 'sha1=fake'],
             'payload'
         );
+
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
 }

@@ -1,4 +1,4 @@
 callback:
     path: /webhook/callback
-    defaults:  { _controller: app.callback_controller:callback }
+    defaults:  { _controller: app.callback_controller:callback, _format: json }
     methods: [POST]

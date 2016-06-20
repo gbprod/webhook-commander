@@ -78,7 +78,7 @@ deploy: deploy-deps deploy-cache
 
 deploy-deps:
 	curl -sS https://getcomposer.org/installer | php
-	composer.phar install -o --no-dev
+	php composer.phar install -o --no-dev
 
 deploy-cache:
 	php bin/console cache:clear --env=prod --no-debug
