@@ -2,6 +2,7 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\Controller\WebhookController;
 use AppBundle\Webhook\Validator\Validator;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -34,7 +35,7 @@ class WebhookValidationListener
     public function onKernelController(FilterControllerEvent $event)
     {
         $controller = $event->getController();
-        if (!is_array($controller)) {
+        if (!is_array($controller) || !$controller[0] instanceof WebhookController) {
             return;
         }
 

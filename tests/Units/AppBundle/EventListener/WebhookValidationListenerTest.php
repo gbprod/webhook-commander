@@ -3,8 +3,8 @@
 namespace Tests\Units\AppBundle\EventListener;
 
 use AppBundle\EventListener\WebhookValidationListener;
+use AppBundle\Controller\WebhookController;
 use AppBundle\Webhook\Validator\Validator;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -44,11 +44,11 @@ class WebhookValidationListenerTest extends \PHPUnit_Framework_TestCase
     private function newEvent($request)
     {
         $event = $this->prophesize(FilterControllerEvent::class);
-        $controller = $this->prophesize(Controller::class);
+        $controller = $this->prophesize(WebhookController::class);
 
         $event
             ->getController()
-            ->willReturn([$controller])
+            ->willReturn([$controller->reveal()])
         ;
 
         $event
