@@ -2,8 +2,10 @@
 
 namespace Tests\Units\AppBundle\DependencyInjection;
 
-use AppBundle\DependencyInjection\AppExtension;
 use AppBundle\Controller\CallbackController;
+use AppBundle\DependencyInjection\AppExtension;
+use AppBundle\EventListener\WebhookValidationListener;
+use AppBundle\Webhook\Validator\GithubValidator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -22,6 +24,8 @@ class AppExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->container = new ContainerBuilder();
         $this->container->registerExtension($this->extension);
+
+        $this->container->setParameter('kernel.secret', 'my-little-secret');
 
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
@@ -44,6 +48,8 @@ class AppExtensionTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ['app.callback_controller', CallbackController::class],
+            ['app.webhook_validator', GithubValidator::class],
+            ['app.webhook_validation_listener', WebhookValidationListener::class],
         ];
     }
 }

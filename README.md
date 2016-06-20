@@ -42,11 +42,11 @@ Go to your project settings -> Webhooks and services -> Add webhook
 
 Fill the form with something like:
 
-Payload URL: http://webhook.my-url.com/webhook/callback
-Content type: application/json
-Secret: The secret you've entered during deploy
-Select: Just the push event
-And check Active
+ * Payload URL: http://webhook.my-url.com/webhook/callback
+ * Content type: application/json
+ * Secret: The secret you've entered during deploy
+ * Select: Just the push event
+ * Check Active
 
 ## Requirements
 

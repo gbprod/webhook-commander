@@ -2,4 +2,5 @@ imports:
     - { resource: config_dev.yml }
 
 framework:
-  test: ~
+    test: ~
+    secret: 'secret'

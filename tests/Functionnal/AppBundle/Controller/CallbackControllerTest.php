@@ -15,8 +15,15 @@ class CallbackControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('POST', '/webhook/callback');
-        
+        $client->request(
+            'POST',
+            '/webhook/callback',
+            [],
+            [],
+            ['HTTP_X_HUB_SIGNATURE' => 'sha1=f75efc0f29bf50c23f99b30b86f7c78fdaf5f11d'],
+            'payload'
+        );
+
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
     }
 }

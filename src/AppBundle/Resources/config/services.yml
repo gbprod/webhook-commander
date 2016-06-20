@@ -1,3 +1,15 @@
 services:
     app.callback_controller:
         class: AppBundle\Controller\CallbackController
+
+    app.webhook_validator:
+        class: AppBundle\Webhook\Validator\GithubValidator
+        arguments:
+            - '%kernel.secret%'
+
+    app.webhook_validation_listener:
+        class: AppBundle\EventListener\WebhookValidationListener
+        arguments:
+            - '@app.webhook_validator'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
