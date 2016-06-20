@@ -16,7 +16,8 @@
         "symfony/finder": "^3.0",
         "symfony/framework-bundle": "^3.0",
         "symfony/yaml": "^3.0",
-        "incenteev/composer-parameter-handler": "^2.1"
+        "incenteev/composer-parameter-handler": "^2.1",
+        "symfony/twig-bundle": "^3.1"
     },
     "scripts": {
         "post-install-cmd": [

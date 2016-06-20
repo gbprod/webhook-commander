@@ -3,6 +3,7 @@
 namespace Tests\Functionnal\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * Functionnal tests for CallbackController
@@ -25,5 +26,21 @@ class CallbackControllerTest extends WebTestCase
         );
 
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
+    }
+
+    public function testCallbackReturn403()
+    {
+        $client = static::createClient();
+
+        $this->setExpectedException(AccessDeniedHttpException::class);
+
+        $client->request(
+            'POST',
+            '/webhook/callback',
+            [],
+            [],
+            ['HTTP_X_HUB_SIGNATURE' => 'sha1=fake'],
+            'payload'
+        );
     }
 }
