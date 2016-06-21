@@ -14,6 +14,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CallbackControllerTest extends \PHPUnit_Framework_TestCase
 {
+    private $handler;
+
+    private $controller;
+
     public function setUp()
     {
         $this->handler = $this->prophesize(Handler::class);
@@ -47,7 +51,7 @@ class CallbackControllerTest extends \PHPUnit_Framework_TestCase
             ->shouldBeCalled()
         ;
 
-        $response = $this->controller->callback($request);
+        $this->controller->callback($request);
     }
 
 }
