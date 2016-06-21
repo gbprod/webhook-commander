@@ -32,6 +32,9 @@ class CallbackControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(204, $response->getStatusCode());
     }
 
+    /**
+     * @param string $content
+     */
     private function newRequest($content)
     {
         return new Request([], [], [], [], [], [], $content);
