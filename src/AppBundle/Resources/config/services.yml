@@ -1,6 +1,8 @@
 services:
     app.callback_controller:
         class: AppBundle\Controller\CallbackController
+        arguments:
+            - '@app.webhook_handler'
 
     app.webhook_validator:
         class: AppBundle\Webhook\Validator\GithubValidator
@@ -13,3 +15,6 @@ services:
             - '@app.webhook_validator'
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    app.webhook_handler:
+        class: AppBundle\Webhook\Handler
