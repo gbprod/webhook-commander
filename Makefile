@@ -60,6 +60,14 @@ test:
 test-unit:
 	vendor/bin/phpunit --testsuite unit
 
+## Loop unit tests
+test-unit-loop:
+	while true; \
+		do vendor/bin/phpunit --testsuite unit; \
+		read continue; \
+	done;
+
+
 ## Run functionnal tests
 test-func:
 	vendor/bin/phpunit --testsuite functionnal

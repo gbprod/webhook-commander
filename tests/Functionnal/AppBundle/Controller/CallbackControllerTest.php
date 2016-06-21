@@ -21,8 +21,8 @@ class CallbackControllerTest extends WebTestCase
             '/webhook/callback',
             [],
             [],
-            ['HTTP_X_HUB_SIGNATURE' => 'sha1=f75efc0f29bf50c23f99b30b86f7c78fdaf5f11d'],
-            'payload'
+            ['HTTP_X_HUB_SIGNATURE' => 'sha1=0ff9bf78d3a75e3e45302ad860e8408b1129a190'],
+            '{"foo": "bar"}'
         );
 
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
@@ -38,7 +38,7 @@ class CallbackControllerTest extends WebTestCase
             [],
             [],
             ['HTTP_X_HUB_SIGNATURE' => 'sha1=fake'],
-            'payload'
+            '{"foo": "bar"}'
         );
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
