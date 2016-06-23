@@ -1,9 +1,14 @@
 # Webhook Commander
 
+Under development ! :)
+
 [![Build Status](https://travis-ci.org/gbprod/webhook-commander.svg?branch=master)](https://travis-ci.org/gbprod/webhook-commander)
 [![codecov](https://codecov.io/gh/gbprod/webhook-commander/branch/master/graph/badge.svg)](https://codecov.io/gh/gbprod/webhook-commander)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gbprod/webhook-commander/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gbprod/webhook-commander/?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/574a9caace8d0e004130d3aa/badge.svg)](https://www.versioneye.com/user/projects/574a9caace8d0e004130d3aa)
+
+This application allows to launch commands triggered by github webhooks.
+I use it for continous delivery.
 
 ## Installation
 
@@ -47,6 +52,24 @@ Fill the form with something like:
  * Secret: The secret you've entered during deploy
  * Select: Just the push event
  * Check Active
+
+Configure your triggers in `app/config/parameter.yml`:
+
+```yaml
+parameters:
+    secret: YourSecretWithGithub
+    triggers:
+        app1:                          # Just a reminder name
+            repository: foo/bar        # The repository (only webhooks triggered by this repository will run command)
+            branch: master             # The branch (only webhooks triggered by this branch will run command)
+            path: /var/www/html/my_app # Path where the command should be executed
+            command: make deploy       # The command to run
+        app2:
+            repository: gbprod/cowboys
+            branch: master
+            path: /var/www/html/cowboys
+            command: git pull && make deploy
+```
 
 ## Requirements
 
