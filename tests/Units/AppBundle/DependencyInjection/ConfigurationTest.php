@@ -24,7 +24,9 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $processed = $this->process([]);
 
-        $this->assertEquals([], $processed);
+        $this->assertEquals([
+            'triggers' => [],
+        ], $processed);
     }
 
     protected function process(array $config)
@@ -35,5 +37,44 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             $this->configuration,
             $config
         );
+    }
+
+    public function testStandardConfiguration()
+    {
+        $processed = $this->process([
+            [
+                'triggers' => [
+                    'app1' => [
+                        'path' => 'my/path/',
+                        'command' => 'make deploy',
+                        'repository' => 'foo/bar',
+                        'branch' => 'master',
+                    ],
+                    'app2' => [
+                        'path' => 'my/second/path/',
+                        'command' => 'deploy.sh',
+                        'repository' => 'gbprod/miscelaneous',
+                        'branch' => 'prod',
+                    ],
+                ],
+            ]
+        ]);
+
+        $this->assertEquals([
+            'triggers' => [
+                'app1' => [
+                    'path' => 'my/path/',
+                    'command' => 'make deploy',
+                    'repository' => 'foo/bar',
+                    'branch' => 'master',
+                ],
+                'app2' => [
+                    'path' => 'my/second/path/',
+                    'command' => 'deploy.sh',
+                    'repository' => 'gbprod/miscelaneous',
+                    'branch' => 'prod',
+                ],
+            ],
+        ], $processed);
     }
 }
