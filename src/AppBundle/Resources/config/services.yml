@@ -18,3 +18,8 @@ services:
 
     app.webhook_handler:
         class: AppBundle\Webhook\Handler
+
+    app.trigger_repository:
+        class: AppBundle\Trigger\InMemoryTriggerRepository
+        arguments:
+            - '%triggers%'
