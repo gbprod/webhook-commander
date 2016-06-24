@@ -29,7 +29,7 @@ class InMemoryTriggerRepository implements TriggerRepository
     {
         return array_values(array_filter(
             array_map(
-                function ($trigger) use ($repository, $branch) {
+                function($trigger) use ($repository, $branch) {
                     if ($trigger['repository'] == $repository && $trigger['branch'] == $branch) {
                         return Trigger::create(
                             $trigger['repository'],
