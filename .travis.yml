@@ -6,10 +6,11 @@ php:
 
 before_script:
     - composer self-update
-    - composer install --no-interaction --dev
+    - composer install --no-interaction
 
 script:
-    - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+    - vendor/bin/phpunit
+    - vendor/bin/phpunit --testsuite unit --coverage-clover=coverage.clover
 
 after_success:
     - wget https://scrutinizer-ci.com/ocular.phar

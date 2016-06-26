@@ -73,7 +73,7 @@ test-func:
 	vendor/bin/phpunit --testsuite functionnal
 
 ## Code coverage
-coverage:
+test-coverage:
 	vendor/bin/phpunit --testsuite unit --coverage-text
 
 ##########
