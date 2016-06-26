@@ -43,7 +43,7 @@ class Handler
 
         $triggers = $this->repository->findMatching($respository, $branch);
 
-        foreach($triggers as $trigger) {
+        foreach ($triggers as $trigger) {
             $this->shell->execute(
                 $trigger->getCommand(),
                 $trigger->getPath()
