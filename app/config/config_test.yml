@@ -4,3 +4,16 @@ imports:
 framework:
     test: ~
     secret: 'secret'
+
+app:
+    triggers:
+        app1:
+            repository: foo/bar
+            branch: master
+            path: /var/www/html/my_app
+            command: make deploy
+        app2:
+            repository: gbprod/miscelaneous
+            branch: prod
+            path: /var/www/html/miscelaneous
+            command: git pull && make deploy

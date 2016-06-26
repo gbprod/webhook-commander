@@ -2,6 +2,7 @@
 
 namespace Tests\Functionnal\AppBundle\Controller;
 
+use AppBundle\Shell\Shell;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -12,27 +13,43 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  */
 class CallbackControllerTest extends WebTestCase
 {
+    private $client;
+    private $shell;
+
+    public function setUp()
+    {
+        $this->client = static::createClient();
+
+        $this->shell = $this->prophesize(Shell::class);
+        $this->client->getContainer()->set('app.shell', $this->shell->reveal());
+    }
     public function testCallbackReturn204()
     {
-        $client = static::createClient();
+        $this->shell
+            ->execute('git pull && make deploy', '/var/www/html/miscelaneous')
+            ->shouldBeCalled()
+        ;
 
-        $client->request(
+        $this->client->request(
             'POST',
             '/webhook/callback',
             [],
             [],
-            ['HTTP_X_HUB_SIGNATURE' => 'sha1=0ff9bf78d3a75e3e45302ad860e8408b1129a190'],
-            '{"foo": "bar"}'
+            ['HTTP_X_HUB_SIGNATURE' => 'sha1=696d01972673c1c21d393ed3ffcc1c425865e159'],
+            json_encode([
+                'ref' => 'refs/heads/prod',
+                'repository' => [
+                    'full_name' => 'gbprod/miscelaneous',
+                ]
+            ])
         );
 
-        $this->assertEquals(204, $client->getResponse()->getStatusCode());
+        $this->assertEquals(204, $this->client->getResponse()->getStatusCode());
     }
 
     public function testCallbackReturn403()
     {
-        $client = static::createClient();
-
-        $client->request(
+        $this->client->request(
             'POST',
             '/webhook/callback',
             [],
@@ -41,6 +58,6 @@ class CallbackControllerTest extends WebTestCase
             '{"foo": "bar"}'
         );
 
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 }

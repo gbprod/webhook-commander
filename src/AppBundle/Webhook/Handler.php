@@ -31,9 +31,9 @@ class Handler
     {
         list($respository, $branch) = $this->extract($payload);
 
-        $repository = $this->repository->findMatching($respository, $branch);
+        $triggers = $this->repository->findMatching($respository, $branch);
 
-        foreach($repository as $trigger) {
+        foreach($triggers as $trigger) {
             $this->shell->execute(
                 $trigger->getCommand(),
                 $trigger->getPath()
@@ -41,11 +41,22 @@ class Handler
         }
     }
 
-    public function extract(array $payload)
+    private function extract(array $payload)
     {
+        if ($this->isInvalidPayload($payload)) {
+            throw new \InvalidArgumentException();
+        }
+
         $repository = $payload['repository']['full_name'];
         $branch = preg_replace('#refs/heads/#', '', $payload['ref']);
 
         return [$repository, $branch];
+    }
+
+    private function isInvalidPayload(array $payload)
+    {
+        return !isset($payload['repository']['full_name'])
+            || !isset($payload['ref'])
+        ;
     }
 }

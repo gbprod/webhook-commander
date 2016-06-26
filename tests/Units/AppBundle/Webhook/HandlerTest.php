@@ -60,4 +60,34 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
             )
         ;
     }
+
+    public function testWillThrowExceptionIfNoRepository()
+    {
+        $this->setExpectedException(\InvalidArgumentException::class);
+
+        $this->testedInstance
+            ->handle(
+                [
+                    'ref' => 'refs/heads/prod',
+                ]
+            )
+        ;
+    }
+
+    public function testWillThrowExceptionIfNoRef()
+    {
+        $this->setExpectedException(\InvalidArgumentException::class);
+
+        $this->testedInstance
+            ->handle(
+                [
+                    'repository' => [
+                        'full_name' => 'gbprod/miscelaneous',
+                    ]
+                ]
+            )
+        ;
+    }
+
+
 }

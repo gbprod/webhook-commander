@@ -25,7 +25,7 @@ services:
     app.trigger_repository:
         class: AppBundle\Trigger\InMemoryTriggerRepository
         arguments:
-            - '%triggers%'
+            - '%app.triggers%'
 
     app.shell:
         class: AppBundle\Shell\Shell
