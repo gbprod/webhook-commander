@@ -22,7 +22,7 @@ class AppExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('%triggers%', $config['triggers']);
+        $container->setParameter('app.triggers', $config['triggers']);
 
         $loader = new YamlFileLoader(
             $container,

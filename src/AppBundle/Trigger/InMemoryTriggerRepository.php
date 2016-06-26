@@ -15,11 +15,11 @@ class InMemoryTriggerRepository implements TriggerRepository
     private $triggers;
 
     /**
-     * @param array $triggers
+     * @param array|null $triggers
      */
-    public function __construct(array $triggers)
+    public function __construct(array $triggers = null)
     {
-        $this->triggers = $triggers;
+        $this->triggers = $triggers ?: array();
     }
 
     /**
