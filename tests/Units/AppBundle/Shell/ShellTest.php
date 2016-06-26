@@ -31,7 +31,7 @@ class ShellTest extends \PHPUnit_Framework_TestCase
     {
         $cwd = getcwd();
         $shell = new Shell();
-        $return = $shell->execute('printf "foo"', __DIR__);
+        $shell->execute('printf "foo"', __DIR__);
 
         $this->assertEquals($cwd, getcwd());
     }

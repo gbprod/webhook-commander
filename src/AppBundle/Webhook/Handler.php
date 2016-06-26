@@ -13,6 +13,16 @@ use AppBundle\Shell\Shell;
 class Handler
 {
     /**
+     * @var TriggerRepository
+     */
+    private $repository;
+
+    /**
+     * @var Shell
+     */
+    private $shell;
+
+    /**
      * @param TriggerRepository $repository
      * @param Shell $shell
      */
