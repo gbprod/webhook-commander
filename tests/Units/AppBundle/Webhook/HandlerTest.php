@@ -93,7 +93,8 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
 
     public function testWillLog()
     {
-         $this->repository
+         $this
+            ->repository
             ->findMatching('gbprod/miscelaneous', 'prod')
             ->willReturn([
                 Trigger::create('gbprod/miscelaneous', 'prod', 'my/first/path/', 'deploy.sh'),
