@@ -19,7 +19,17 @@ class InMemoryTriggerRepository implements TriggerRepository
      */
     public function __construct(array $triggers = null)
     {
-        $this->triggers = $triggers ?: array();
+        $this->triggers = array_map(
+            function($trigger) {
+                return Trigger::create(
+                    $trigger['repository'],
+                    $trigger['branch'],
+                    $trigger['path'],
+                    $trigger['command']
+                );
+            },
+            $triggers ?: array()
+        );
     }
 
     /**
@@ -27,20 +37,15 @@ class InMemoryTriggerRepository implements TriggerRepository
      */
     public function findMatching($repository, $branch)
     {
-        return array_values(array_filter(
-            array_map(
-                function($trigger) use ($repository, $branch) {
-                    if ($trigger['repository'] == $repository && $trigger['branch'] == $branch) {
-                        return Trigger::create(
-                            $trigger['repository'],
-                            $trigger['branch'],
-                            $trigger['path'],
-                            $trigger['command']
-                        );
-                    }
-                },
-                $this->triggers
+        return array_values(
+            array_filter(
+                $this->triggers,
+                function ($trigger) use ($repository, $branch) {
+                    return $trigger->getRepository() == $repository
+                        && $trigger->getBranch() == $branch
+                    ;
+                }
             )
-        ));
+        );
     }
 }

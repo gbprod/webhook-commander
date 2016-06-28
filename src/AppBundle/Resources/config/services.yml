@@ -21,6 +21,8 @@ services:
         arguments:
             - '@app.trigger_repository'
             - '@app.shell'
+        calls:
+            - ['setLogger', ['@logger']]
 
     app.trigger_repository:
         class: AppBundle\Trigger\InMemoryTriggerRepository
