@@ -9,6 +9,7 @@ use AppBundle\Shell\Shell;
 use AppBundle\Trigger\TriggerRepository;
 use AppBundle\Webhook\Handler;
 use AppBundle\Webhook\Validator\GithubValidator;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -28,6 +29,7 @@ class AppExtensionTest extends \PHPUnit_Framework_TestCase
         $this->container = new ContainerBuilder();
         $this->container->registerExtension($this->extension);
 
+        $this->container->set('logger', $this->getMock(LoggerInterface::class));
         $this->container->setParameter('kernel.secret', 'my-little-secret');
         $this->container->setParameter('triggers', []);
 
