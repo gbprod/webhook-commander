@@ -4,6 +4,7 @@ namespace AppBundle\Webhook;
 
 use AppBundle\Trigger\TriggerRepository;
 use AppBundle\Shell\Shell;
+use Psr\Log\LoggerInterface;
 
 /**
  * Webhook handler
@@ -23,6 +24,11 @@ class Handler
     private $shell;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger = null;
+
+    /**
      * @param TriggerRepository $repository
      * @param Shell $shell
      */
@@ -30,6 +36,16 @@ class Handler
     {
         $this->repository = $repository;
         $this->shell = $shell;
+    }
+
+    /**
+     * Add logger
+     *
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 
     /**
@@ -48,6 +64,15 @@ class Handler
                 $trigger->getCommand(),
                 $trigger->getPath()
             );
+
+            if ($this->logger) {
+                $this->logger->notice('Command triggered', [
+                    'repository' => $trigger->getRepository(),
+                    'branch'     => $trigger->getBranch(),
+                    'path'       => $trigger->getPath(),
+                    'command'    => $trigger->getCommand(),
+                ]);
+            }
         }
     }
 

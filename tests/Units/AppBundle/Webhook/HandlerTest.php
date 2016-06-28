@@ -6,6 +6,7 @@ use AppBundle\Shell\Shell;
 use AppBundle\Trigger\Trigger;
 use AppBundle\Trigger\TriggerRepository;
 use AppBundle\Webhook\Handler;
+use Psr\Log\LoggerInterface;
 
 /**
  * Tests for Webhook handler
@@ -90,4 +91,43 @@ class HandlerTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testWillLog()
+    {
+         $this->repository
+            ->findMatching('gbprod/miscelaneous', 'prod')
+            ->willReturn([
+                Trigger::create('gbprod/miscelaneous', 'prod', 'my/first/path/', 'deploy.sh'),
+            ])
+        ;
+
+        $this->shell
+            ->execute('deploy.sh', 'my/first/path/')
+            ->shouldBeCalled()
+        ;
+
+        $logger = $this->prophesize(LoggerInterface::class);
+
+        $logger
+            ->notice('Command triggered', [
+                'repository' => 'gbprod/miscelaneous',
+                'branch'     => 'prod',
+                'path'       => 'my/first/path/',
+                'command'    => 'deploy.sh'
+            ])
+            ->shouldBeCalled()
+        ;
+
+        $this->testedInstance->setLogger($logger->reveal());
+
+        $this->testedInstance
+            ->handle(
+                [
+                    'ref' => 'refs/heads/prod',
+                    'repository' => [
+                        'full_name' => 'gbprod/miscelaneous',
+                    ]
+                ]
+            )
+        ;
+   }
 }
