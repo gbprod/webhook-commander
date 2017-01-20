@@ -2,6 +2,7 @@
 
 Under development ! :)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cf491f0c33a541f294be1ba2f02b6128)](https://www.codacy.com/app/GBProd/webhook-commander?utm_source=github.com&utm_medium=referral&utm_content=gbprod/webhook-commander&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/gbprod/webhook-commander.svg?branch=master)](https://travis-ci.org/gbprod/webhook-commander)
 [![codecov](https://codecov.io/gh/gbprod/webhook-commander/branch/master/graph/badge.svg)](https://codecov.io/gh/gbprod/webhook-commander)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gbprod/webhook-commander/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gbprod/webhook-commander/?branch=master)
